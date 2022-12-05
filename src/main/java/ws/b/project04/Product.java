@@ -9,6 +9,7 @@ package ws.b.project04;
  * @author alamnurcahaya
  */
 
+//deklarasi kelas dan variabel
 public class Product {
     private String id;
     private String name;

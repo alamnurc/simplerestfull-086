@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  * @author alamnurcahaya
  */
 
+//ControllerAdvice untuk menangani exception jika produk tidak ada
 @ControllerAdvice
 public class ProductExceptionController {
+    // ExceptionHandler digunakan untuk menangani exception mengirim respon ke user
    @ExceptionHandler(value = ProductNotfoundException.class)
    public ResponseEntity<Object> exception(ProductNotfoundException exception) {
+       //tampil pesan jika data yang diperbarui tidak ada
       return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
    }
 }

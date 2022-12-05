@@ -25,8 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductServiceController {
    private static Map<String, Product> productRepo = new HashMap<>();
    static {
+      //honey adalah bagian dari Product
       Product honey = new Product();
+      //beri id pada honey
       honey.setId("1");
+      //beri nama pada honey
       honey.setName("Honey");
       productRepo.put(honey.getId(), honey);
       
@@ -36,7 +39,10 @@ public class ProductServiceController {
       productRepo.put(almond.getId(), almond);
    }
    
+   //@RequestMapping untuk mengatur Path URL 
    @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
+   //@PathVariabel mengatur URL request khusus atau dinamis
+   //if else untuk mencari tahu ketersediaan id tersebut
    public ResponseEntity<Object> delete(@PathVariable("id") String id) { 
        if(!productRepo.containsKey(id)){
            return new ResponseEntity<>("Product deleted not found", HttpStatus.OK);
@@ -45,37 +51,44 @@ public class ProductServiceController {
            productRepo.remove(id);
            return new ResponseEntity<>("Product is deleted successsfully", HttpStatus.OK);
        }
-      
    }
    
+   //@RequestMapping untuk mengatur Path URL 
    @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
+   //@PathVariabel mengatur URL request khusus atau dinamis
+   //if else untuk mencari tahu ketersediaan id tersebut
    public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product) { 
       if(!productRepo.containsKey(id)){
            return new ResponseEntity<>("Product updated not found", HttpStatus.OK);
        }
        else{
+           //hapus data berdasarkan id
            productRepo.remove(id);
            product.setId(id);
+           //memperbarui data berdasarkan id
            productRepo.put(id, product);
            return new ResponseEntity<>("Product is updated successsfully", HttpStatus.OK);
        }
-      
    }
    
+   //@RequestMapping untuk mengatur Path URL
    @RequestMapping(value = "/products", method = RequestMethod.POST)
+   //@PathVariabel mengatur URL request khusus atau dinamis
+   //if else untuk mencari tahu ketersediaan id tersebut
    public ResponseEntity<Object> createProduct(@RequestBody @Validated Product product) {
        
+       //jika id produk sudah ada, tampilkan pesan "Product not duplicate"
       if(productRepo.containsKey(product.getId())){
            return new ResponseEntity<>("Product not duplicate", HttpStatus.OK);
        }
+      //jika id produk belum ada, buat data baru dan tampilkan pesan "Product is created successfully"
        else{
            productRepo.put(product.getId(), product);
            return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
        }
-       
-       
-      
    }
+   
+   //@RequestMapping untuk mengatur Path URL
    @RequestMapping(value = "/products")
    public ResponseEntity<Object> getProduct() {
       return new ResponseEntity<>(productRepo.values(), HttpStatus.OK);
