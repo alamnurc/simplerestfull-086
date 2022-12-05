@@ -8,6 +8,7 @@ package ws.b.project04;
  *
  * @author alamnurcahaya
  */
+
 public class Product {
     private String id;
     private String name;
