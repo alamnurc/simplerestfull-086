@@ -31,11 +31,17 @@ public class ProductServiceController {
       honey.setId("1");
       //beri nama pada honey
       honey.setName("Honey");
+      honey.setPrice(55000);
+      honey.setQuantity(9);
+      honey.setTotal();
       productRepo.put(honey.getId(), honey);
       
       Product almond = new Product();
       almond.setId("2");
       almond.setName("Almond");
+      almond.setPrice(75000);
+      almond.setQuantity(9);
+      almond.setTotal();
       productRepo.put(almond.getId(), almond);
    }
    
